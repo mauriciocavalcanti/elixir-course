@@ -1,0 +1,27 @@
+<h1>Show Topic</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @topic.title %>
+
+    <div class="input-field">
+      <textarea class="materialize-textarea"></textarea>
+      <button class="btn">Add Comment</button>
+      <ul class="collection">
+      </ul>
+    </div>
+
+  </li>
+</ul>
+<%= if @current_user.id == @topic.user_id do %>
+<span><%= link "Edit", to: Routes.topic_path(@conn, :edit, @topic) %></span>
+<% end %>
+<span><%= link "Back", to: Routes.topic_path(@conn, :index) %></span>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    window.createSocket(<%= @topic.id %>)
+  });
+</script>
